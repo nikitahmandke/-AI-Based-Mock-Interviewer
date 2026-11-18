@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InterviewPrepAI - Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4913ec",
+                        "primary-light": "#8a2be2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#151022",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .glassmorphism-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glassmorphism-card {
+            background: rgba(40, 30, 60, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-button {
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(to right, #4913ec, #8a2be2);
+            transition: all 0.3s ease;
+        }
+        .gradient-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(73, 19, 236, 0.5);
+        }
+        .gradient-button .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: ripple-effect 0.6s linear;
+        }
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative min-h-screen w-full overflow-x-hidden bg-gradient-to-b from-white via-[#E6E6FA] to-background-light dark:from-background-dark dark:to-[#110e1b]">
+<div class="absolute inset-0 z-0">
+<div class="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(73,19,236,0.15),rgba(255,255,255,0))]"></div>
+<div class="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(138,43,226,0.1),rgba(255,255,255,0))]"></div>
+</div>
+<div class="relative z-10 flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap px-10 py-4">
+<div class="flex items-center gap-3 text-slate-800 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path></svg>
+</div>
+<h2 class="text-lg font-bold">InterviewPrepAI</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="{{ url_for('dashboard') }}">Home</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('pyqs') }}">PYQs</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('history') }}">History</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('pricing') }}">Pricing</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('contact') }}">Contact</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('about') }}">About</a>
+
+</nav>
+</header>
+<main class="flex-1 px-4 py-12 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-7xl">
+<div class="text-center">
+<h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+    Your Interview Results
+</h1>
+<p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+    Detailed analysis of your performance.
+</p>
+</div>
+<div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+<div class="glassmorphism-card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white">Overall Score</h3>
+<p class="mt-2 text-5xl font-extrabold text-primary">{{ score }}%</p>
+<p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+    {% if score >= 85 %} Excellent performance! 
+    {% elif score >= 70 %} Good performance, room to improve. 
+    {% else %} Needs improvement. Keep practicing! 
+    {% endif %}
+</p>
+</div>
+<div class="glassmorphism-card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white">Confidence</h3>
+<p class="mt-2 text-5xl font-extrabold text-primary">{{ confidence }}%</p>
+<p class="mt-2 text-sm text-slate-500 dark:text-slate-400">{{ confidence_feedback }}</p>
+</div>
+<div class="glassmorphism-card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white">Grammar Level</h3>
+<p class="mt-2 text-5xl font-extrabold text-primary">{{ grammar }}%</p>
+<p class="mt-2 text-sm text-slate-500 dark:text-slate-400">{{ grammar_feedback }}</p>
+</div>
+<div class="glassmorphism-card rounded-xl p-6 flex flex-col items-center justify-center text-center">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white">Speech Clarity</h3>
+<p class="mt-2 text-5xl font-extrabold text-primary">{{ clarity }}%</p>
+<p class="mt-2 text-sm text-slate-500 dark:text-slate-400">{{ clarity_feedback }}</p>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 glassmorphism-card rounded-xl p-6">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-4">Performance Breakdown</h3>
+<canvas id="performanceChart"></canvas>
+</div>
+<div class="glassmorphism-card rounded-xl p-6">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-4">Technical Skills</h3>
+<canvas id="technicalSkillsChart"></canvas>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="glassmorphism-card rounded-xl p-6">
+    <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-4">Bar Chart (Confidence, Tone, Eye Contact)</h3>
+    <img class="w-full rounded" src="{{ url_for('static', filename=bar_chart_url) }}" alt="Performance Bar Chart"/>
+  </div>
+  <div class="glassmorphism-card rounded-xl p-6">
+    <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-4">Interview Progress</h3>
+    <img class="w-full rounded" src="{{ url_for('static', filename=line_chart_url) }}" alt="Interview Progress Line Chart"/>
+  </div>
+  <div class="lg:col-span-2 glassmorphism-card rounded-xl p-6">
+    <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-4">AI Improvement Suggestions</h3>
+    <div class="prose dark:prose-invert max-w-none whitespace-pre-wrap text-slate-700 dark:text-slate-300">{{ ai_suggestions }}</div>
+  </div>
+</div>
+<div class="mt-8 glassmorphism-card rounded-xl p-8">
+<h3 class="text-2xl font-bold text-slate-800 dark:text-white mb-6">Detailed Feedback &amp; Suggestions</h3>
+<div class="space-y-6">
+<div>
+<h4 class="text-lg font-semibold text-primary flex items-center"><span class="material-symbols-outlined mr-2">thumb_up</span>Strengths</h4>
+<ul class="list-disc list-inside mt-2 text-slate-700 dark:text-slate-300 space-y-1">
+{% for item in strengths %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-amber-600 dark:text-amber-500 flex items-center"><span class="material-symbols-outlined mr-2">lightbulb</span>Areas for Improvement</h4>
+<ul class="list-disc list-inside mt-2 text-slate-700 dark:text-slate-300 space-y-1">
+{% for item in improvements %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
+<a href="{{ url_for('screen') }}">
+  <button class="gradient-button w-full sm:w-auto flex items-center justify-center rounded-full h-12 px-8 text-white text-base font-bold shadow-[0_5px_15px_rgba(73,19,236,0.4)]">
+    <span class="material-symbols-outlined mr-2">videocam</span> Practice Again
+  </button>
+</a>
+<a href="{{ url_for('download_report') }}" 
+   class="px-6 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition">
+   📄 Download Report
+</a>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(performanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Clarity', 'Confidence', 'Relevance', 'Completeness', 'Pacing'],
+                    datasets: [{
+                        label: 'Your Score',
+                        data: {{ breakdown | tojson }},
+                        backgroundColor: 'rgba(73, 19, 236, 0.6)',
+                        borderColor: 'rgba(73, 19, 236, 1)',
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }, {
+                        label: 'Ideal Range',
+                        data: [80, 85, 85, 80, 80],
+                        backgroundColor: 'rgba(138, 43, 226, 0.3)',
+                        borderColor: 'rgba(138, 43, 226, 1)',
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: document.documentElement.classList.contains('dark') ? 'white' : 'black'
+                            }
+                        },
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: document.documentElement.classList.contains('dark') ? 'white' : 'black'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: document.documentElement.classList.contains('dark') ? 'white' : 'black'
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            const technicalSkillsCtx = document.getElementById('technicalSkillsChart').getContext('2d');
+            new Chart(technicalSkillsCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Data Structures', 'Algorithms', 'System Design', 'Databases', 'Networking'],
+                    datasets: [{
+                        label: 'Your Proficiency',
+                        data: {{ tech_skills | tojson }},
+                        fill: true,
+                        backgroundColor: 'rgba(73, 19, 236, 0.2)',
+                        borderColor: 'rgba(73, 19, 236, 1)',
+                        pointBackgroundColor: 'rgba(73, 19, 236, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(73, 19, 236, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                color: document.documentElement.classList.contains('dark') ? 'white' : 'black',
+                                font: { size: 12 }
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: document.documentElement.classList.contains('dark') ? 'white' : 'black'
+                            }
+                        }
+                    }
+                }
+            });
+            const buttons = document.querySelectorAll('.gradient-button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = button.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    ripple.style.width = ripple.style.height = `${size}px`;
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    ripple.classList.add('ripple');
+                    const existingRipple = button.getElementsByClassName('ripple')[0];
+                    if (existingRipple) {
+                        existingRipple.remove();
+                    }
+                    button.appendChild(ripple);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

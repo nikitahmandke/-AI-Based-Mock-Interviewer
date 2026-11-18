@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Mock Interview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          primary: "#4913ec",
+          "background-light": "#f6f6f8",
+          "background-dark": "#151022",
+        },
+        fontFamily: {
+          display: ["Manrope"]
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+body { font-family: 'Manrope', sans-serif; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="flex items-center justify-between p-6 bg-white shadow">
+  <h1 class="text-xl font-bold">InterviewPrep.ai</h1>
+  <div class="text-sm text-gray-600">
+    Question <span id="questionCounter">1</span> of {{ total_questions }}
+  </div>
+</header>
+
+<!-- Loading State -->
+<div id="loading" class="flex-grow flex items-center justify-center">
+  <div class="text-center">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+    <p class="text-lg">Preparing your interview...</p>
+  </div>
+</div>
+
+<!-- Chat Area -->
+<main class="flex-grow overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 hidden" id="chatContainer">
+  <div id="chatBox" class="max-w-4xl mx-auto space-y-6"></div>
+</main>
+
+<!-- Error State -->
+<div id="errorState" class="flex-grow flex items-center justify-center hidden">
+  <div class="text-center max-w-md p-6 bg-red-50 rounded-lg">
+    <div class="text-red-500 text-4xl mb-4">⚠</div>
+    <h3 class="text-xl font-bold text-red-800 mb-2">Interview Setup Error</h3>
+    <p class="text-red-600 mb-4" id="errorMessage">Unable to load interview questions.</p>
+    <button onclick="goBack()" class="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition">
+      Go Back & Try Again
+    </button>
+  </div>
+</div>
+
+<!-- Footer Input -->
+<footer class="sticky bottom-0 z-20 p-6 bg-white shadow hidden" id="inputFooter">
+  <div class="max-w-2xl mx-auto flex flex-wrap gap-3 items-center">
+    <input id="userInput" type="text" placeholder="Type your answer here..."
+           class="flex-grow px-4 py-3 rounded-lg bg-gray-100 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary"/>
+
+    <!-- Send button -->
+    <button id="sendBtn"
+            class="px-6 py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 transition disabled:opacity-50">
+      Send
+    </button>
+
+    <!-- 🎙 Mic button for speech input -->
+    <button id="micBtn"
+            class="px-4 py-3 rounded-lg bg-green-600 text-white font-bold hover:bg-green-700 transition">
+      🎙 Speak
+    </button>
+
+    <!-- End Interview -->
+    <button onclick="endInterview()"
+            class="px-6 py-3 rounded-lg bg-red-600 text-white font-bold hover:bg-red-700 transition">
+      End Interview
+    </button>
+  </div>
+</footer>
+
+<script>
+const serverData = {
+    currentQuestion: {{ current_question|default("")|tojson|safe }},
+    questionIndex: {{ question_index|default(0)|tojson|safe }},
+    totalQuestions: {{ total_questions|default(0)|tojson|safe }}
+};
+
+console.log("Server data received:", serverData);
+
+// Interview state
+let currentQuestion = serverData.currentQuestion;
+let currentIndex = serverData.questionIndex || 0;
+let totalQuestions = serverData.totalQuestions || 5;
+let isInterviewActive = true;
+
+// DOM elements
+const chatBox = document.getElementById("chatBox");
+const input = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+const loading = document.getElementById("loading");
+const chatContainer = document.getElementById("chatContainer");
+const inputFooter = document.getElementById("inputFooter");
+const errorState = document.getElementById("errorState");
+const questionCounter = document.getElementById("questionCounter");
+
+// Initialize the interview
+window.onload = () => {
+    console.log("Initializing interview...");
+    
+    if (!currentQuestion || currentQuestion.trim() === "") {
+        showError("No interview question available. Please try uploading your resume again or contact support.");
+        return;
+    }
+    
+    // Update question counter
+    updateQuestionCounter();
+    
+    // Hide loading, show chat interface
+    setTimeout(() => {
+        loading.classList.add('hidden');
+        chatContainer.classList.remove('hidden');
+        inputFooter.classList.remove('hidden');
+        
+        // Show welcome message and first question
+        appendMessage("Interviewer", "Welcome to your mock interview! I'll ask you a series of questions. Take your time to provide thoughtful answers.", "ai");
+        
+        setTimeout(() => {
+            appendMessage("Interviewer", currentQuestion, "ai");
+            input.focus();
+        }, 1000);
+    }, 500);
+};
+
+// Update question counter display
+function updateQuestionCounter() {
+    questionCounter.textContent = currentIndex + 1;
+}
+
+// Handle sending answer
+sendBtn.addEventListener("click", sendMessage);
+input.addEventListener("keypress", function(e){
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+async function sendMessage() {
+    if (!isInterviewActive) return;
+    
+    const answer = input.value.trim();
+    if (!answer) {
+        alert("Please provide an answer before continuing.");
+        return;
+    }
+
+    // Disable input while processing
+    input.disabled = true;
+    sendBtn.disabled = true;
+    
+    // Show user's answer
+    appendMessage("You", answer, "user");
+    input.value = "";
+
+    try {
+        const response = await fetch("/ask", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ 
+                question: currentQuestion, 
+                answer: answer
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log("Response from server:", data);
+
+        // Show AI feedback
+        if (data.feedback) {
+            setTimeout(() => {
+                appendMessage("Interviewer", data.feedback, "ai");
+            }, 500);
+        }
+
+        // Handle next question or interview completion
+        if (data.is_last_question) {
+            setTimeout(() => {
+                appendMessage("Interviewer", "That concludes our interview! Thank you for your thoughtful responses. Click 'End Interview' to see your detailed results and feedback.", "ai");
+                isInterviewActive = false;
+                input.disabled = true;
+                sendBtn.disabled = true;
+            }, 1500);
+        } else if (data.next_question) {
+            currentQuestion = data.next_question;
+            currentIndex = data.current_index || currentIndex + 1;
+            updateQuestionCounter();
+            
+            setTimeout(() => {
+                appendMessage("Interviewer", currentQuestion, "ai");
+            }, 1500);
+        }
+
+    } catch (error) {
+        console.error("Error sending message:", error);
+        
+        // Show error message but allow user to continue
+        setTimeout(() => {
+            appendMessage("Interviewer", "I apologize, but I'm experiencing a technical issue. Let me ask you another question to continue the interview.", "ai");
+            
+            // Try to continue with a generic question
+            currentIndex++;
+            if (currentIndex < totalQuestions) {
+                currentQuestion = "Can you tell me about a time when you faced a significant challenge and how you overcame it?";
+                updateQuestionCounter();
+                setTimeout(() => {
+                    appendMessage("Interviewer", currentQuestion, "ai");
+                }, 1000);
+            } else {
+                // End interview if we've reached the limit
+                setTimeout(() => {
+                    appendMessage("Interviewer", "That concludes our interview. Click 'End Interview' to see your results.", "ai");
+                    isInterviewActive = false;
+                    input.disabled = true;
+                    sendBtn.disabled = true;
+                }, 1000);
+            }
+        }, 500);
+    } finally {
+        // Re-enable input if interview is still active
+        if (isInterviewActive) {
+            input.disabled = false;
+            sendBtn.disabled = false;
+            input.focus();
+        }
+    }
+}
+
+// Append message to chat
+function appendMessage(sender, text, type) {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("flex", "items-start", "gap-3", "animate-fade-in");
+    
+    if (type === "user") {
+        wrapper.classList.add("justify-end");
+    }
+
+    // Avatar
+    const avatar = document.createElement("div");
+    avatar.classList.add("flex-shrink-0", "w-8", "h-8", "rounded-full", "flex", "items-center", "justify-center", "font-bold", "text-sm");
+    
+    if (type === "user") {
+        avatar.classList.add("bg-primary", "text-white");
+        avatar.textContent = "You".charAt(0);
+        wrapper.classList.add("flex-row-reverse");
+    } else {
+        avatar.classList.add("bg-gray-300", "text-gray-700");
+        avatar.textContent = "AI";
+    }
+
+    // Message bubble
+    const bubble = document.createElement("div");
+    bubble.classList.add("rounded-lg", "p-4", "max-w-lg", "shadow-sm");
+    
+    if (type === "user") {
+        bubble.classList.add("bg-primary", "text-white");
+        bubble.innerHTML = `<p>${text}</p>`;
+    } else {
+        bubble.classList.add("bg-white", "border", "text-gray-800");
+        bubble.innerHTML = `<p class="font-medium text-primary mb-1">${sender}</p><p>${text}</p>`;
+    }
+
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(bubble);
+    chatBox.appendChild(wrapper);
+    
+    // Smooth scroll to bottom
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Show error state
+function showError(message) {
+    loading.classList.add('hidden');
+    chatContainer.classList.add('hidden');
+    inputFooter.classList.add('hidden');
+    errorState.classList.remove('hidden');
+    document.getElementById('errorMessage').textContent = message;
+}
+
+// Go back to dashboard
+function goBack() {
+    if (confirm("Are you sure you want to go back? Your progress will be lost.")) {
+        window.location.href = "/dashboard";
+    }
+}
+
+// End interview
+function endInterview() {
+    if (confirm("Are you sure you want to end the interview? You can view your results after ending.")) {
+        // Clear any session data and redirect to results
+        window.location.href = "/result";
+    }
+}
+
+// Prevent accidental page refresh
+window.addEventListener('beforeunload', function(e) {
+    if (isInterviewActive) {
+        e.preventDefault();
+        e.returnValue = '';
+        return 'Are you sure you want to leave? Your interview progress will be lost.';
+    }
+});
+
+console.log("Interview interface initialized successfully");
+
+// =============================
+// TAB SWITCHING BLOCKER
+// =============================
+let tabWarningCount = 0;
+
+// Detect when user leaves the tab
+document.addEventListener("visibilitychange", function () {
+    if (!isInterviewActive) return;
+
+    if (document.hidden) {
+        tabWarningCount++;
+
+        if (tabWarningCount === 1) {
+            alert("⚠ Warning: Tab switching is not allowed! Next time the interview will stop.");
+        } 
+        else if (tabWarningCount >= 2) {
+            alert("❌ Interview stopped due to repeated tab switching.");
+            window.location.href = "/interview_stopped"; 
+        }
+    }
+});
+
+// 🎙 Browser Speech-to-Text (STT)
+const micBtn = document.getElementById("micBtn");
+const userInput = document.getElementById("userInput");
+
+// Check if browser supports Speech Recognition
+if ('webkitSpeechRecognition' in window) {
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  micBtn.addEventListener("click", () => {
+    recognition.start();
+    micBtn.textContent = "🎤 Listening...";
+    micBtn.disabled = true;
+  });
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    userInput.value = transcript;
+    micBtn.textContent = "🎙 Speak";
+    micBtn.disabled = false;
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Speech recognition error:", event.error);
+    micBtn.textContent = "🎙 Speak";
+    micBtn.disabled = false;
+  };
+
+  recognition.onend = () => {
+    micBtn.textContent = "🎙 Speak";
+    micBtn.disabled = false;
+  };
+} else {
+  console.warn("Speech recognition not supported in this browser.");
+  micBtn.style.display = "none"; // Hide mic if unsupported
+}
+
+</script>
+</body>
+</html>

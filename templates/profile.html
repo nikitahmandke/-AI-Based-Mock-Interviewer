@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InterviewPrepAI - Dashboard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4913ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#151022",
+                        "foreground-light": "#110d1b",
+                        "foreground-dark": "#f6f6f8",
+                        "muted-light": "#5f4c9a",
+                        "muted-dark": "#a89ec9",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1e172f",
+                        "border-light": "#e5e1f1",
+                        "border-dark": "#30264a",
+                        "success-light": "#078843",
+                        "success-dark": "#4ade80",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'glow': '0 0 40px -10px rgb(73 19 236 / 0.3)',
+                    },
+                    keyframes: {
+                        ripple: {
+                          '0%, 100%': { transform: 'scale(1)', opacity: '0.2' },
+                          '50%': { transform: 'scale(1.5)', opacity: '0' },
+                        }
+                    },
+                    animation: {
+                        ripple: 'ripple 1s ease-in-out',
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .group:hover .group-hover-ripple:after {
+            animation: ripple 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-foreground-light dark:text-foreground-dark">
+<div class="flex flex-col min-h-screen">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark px-10 py-4">
+<div class="flex items-center gap-3 text-foreground-light dark:text-foreground-dark">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path></svg>
+</div>
+<h2 class="text-xl font-bold">InterviewPrepAI</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="{{ url_for('dashboard') }}">Home</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('pyqs') }}">PYQs</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('history') }}">History</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('contact') }}">Contact</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('about') }}">About</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('profile') }}">Profile</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-full bg-background-light dark:bg-card-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+<svg class="text-muted-light dark:text-muted-dark" fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+</svg>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAj05dEB_Ge1Br1PBWKb_BE6PIXCjhn-WItrbKds9emW3cIuJbGh-OP3FLlZz716d38kh9c3pXJRdEz2S-mUqpLEsggMrkL-J3ZEx0iBHsOAebHs0q--_-KU3wUqfQcg6XGhKfV0Uz75sB70F8EeztdmNx6yAs8jPFbwyJOKflbLihU4qRyEmGz1Abl4x6StAYxI9NRcbWtS3Uh6rSIA-2KwoHbIbuZUiKBubaeCnmIcmlyeA0yyry7m97yGhAwlIvLyhbJsI0B3-U");'></div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="relative rounded-xl overflow-hidden p-8 md:p-12 bg-gradient-to-br from-white via-blue-50 to-[#E6E6FA] dark:from-background-dark dark:via-[#19132c] dark:to-[#221a3b] mb-12">
+<div class="flex flex-col md:flex-row items-center gap-8">
+<img alt="User Avatar" class="size-32 rounded-full border-4 border-white dark:border-background-dark shadow-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7_LcFVlsgjIcHbmvHagrcArmf5qcsos--l7Qre6yVxaRDORuWBRm2WZoxszDuusf0Z_XO4W_N0FrnQkO1etozR7ER_FJoaZWd2uh4GM0PKMOvRnZGWXFGAaOzFfKBbY9CJZbfC-qN3J3bz3fvAS_8I-LrV6hbDlx_SvhGQrX6M-iZaGzLVZ8dfxtKZFLjLGwkpcVdw_Q5XGs4_wI-fFR_LiRDboHJruuB_e8HMB866yrvgLrxivPxF-F9MZ_VBioMnMXMRh-HQCU"/>
+<div class="text-center md:text-left">
+<h1 class="text-3xl font-bold text-foreground-light dark:text-foreground-dark">Welcome back, Sarah!</h1>
+<p class="text-lg text-muted-light dark:text-muted-dark mt-1">Ready to ace your next interview? Let's get started.</p>
+</div>
+</div>
+</div>
+<section>
+<h2 class="text-2xl font-bold text-foreground-light dark:text-foreground-dark px-1 pb-4">Recent Interviews</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<div class="bg-card-light dark:bg-card-dark rounded-lg p-4 flex flex-col gap-4 shadow-md hover:shadow-glow transition-shadow duration-300">
+<div class="aspect-square w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfZF-p4ICakClgEDTCqrrEq_MxYOq1RCymETVS0hevC6nNHktqGaTjIG29y1YRqtc2lYbtjYbkZmE7hW3Gsuq_rTqCysb7yA_1THrAGJFzfGHYt-gUYO7IF6HelmPCKxa6o7TqqToBHaj6tU77QaS87h95gb7HCB2vUqcwYBHaeN9jvh1jZXz5PylX8Rr3VtLJs2RNQLng0FwPig1VGPc7v9XcQqv_F93EjgkeKgtrSMaiS3XIMWOmuxCzR8zFxO8L9MNxe3MI16E");'></div>
+<div>
+<p class="font-bold text-foreground-light dark:text-foreground-dark">Interview with TechCorp</p>
+<p class="text-sm text-muted-light dark:text-muted-dark">Software Engineer Role</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg p-4 flex flex-col gap-4 shadow-md hover:shadow-glow transition-shadow duration-300">
+<div class="aspect-square w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJFJqqICGO6aGpXZcnJjkETw66QfYnRQlTO6IauiwtetNgyZdJgZSClxcNn0qhmyjsLnxe_l-olZjhGjvNk_aZWgmSN05mmgUNjS8tQcPRHN1RoLRRorV6L9BpuTah_D-nedJ7fY7WocZqO3IH6RM-NVHnDF1cLtFTfZpr8yMVMfK1zlhEaVq8oN5Zt1URgo1lhxtAsPZNAbr3lB97fmCbzPFjY_PRqTyombxwnHSsgHPCqs8b7zHxUIlmkNTiSIG_-dMjB9x8f2k");'></div>
+<div>
+<p class="font-bold text-foreground-light dark:text-foreground-dark">Innovate Solutions</p>
+<p class="text-sm text-muted-light dark:text-muted-dark">Product Manager Position</p>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-lg p-4 flex flex-col gap-4 shadow-md hover:shadow-glow transition-shadow duration-300">
+<div class="aspect-square w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlhp1jgdmaYnD1WjVynrfkNtv0iP8Ftjsik93ojP-BhcjjakbkhCmGDrHgLPhm9jaHGIDiU4Gp5yIDtg-8hwkN0xq3pBPr_xwRJXDUka3rJGAfrOBvWJvIrI-xF6fbzFZHxAE5JO9DHQwVa3TtytrzMHEMtfRHI9ws7wdYf1JcpK8nT1BVSHtZx3cuei-J9utT349NYHxFcMVp2tFXIAz5oyf_xoziF2MMs2T_trgNelsqoC9QiXvAf_mMGCUU3mazfhiO8nf2hHQ");'></div>
+<div>
+<p class="font-bold text-foreground-light dark:text-foreground-dark">Interview with FutureTech</p>
+<p class="text-sm text-muted-light dark:text-muted-dark">Data Scientist Opportunity</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-12">
+<h2 class="text-2xl font-bold text-foreground-light dark:text-foreground-dark px-1 pb-4">Analytics</h2>
+<div class="bg-card-light dark:bg-card-dark rounded-lg p-6 shadow-md hover:shadow-glow transition-shadow duration-300">
+<div class="flex flex-col md:flex-row md:items-start gap-6">
+<div class="flex-1">
+<p class="font-bold text-lg text-foreground-light dark:text-foreground-dark">Interview Performance Over Time</p>
+<p class="text-4xl font-bold text-primary mt-2">85%</p>
+<div class="flex items-center gap-2 mt-1">
+<p class="text-sm text-muted-light dark:text-muted-dark">Last 6 Months</p>
+<p class="text-sm font-medium text-success-light dark:text-success-dark">+15%</p>
+</div>
+</div>
+<div class="w-full md:w-2/3">
+<div class="relative h-48">
+<svg fill="none" height="100%" preserveAspectRatio="none" viewBox="0 0 472 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V150H0V109Z" fill="url(#perfGradient)"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#4913ec" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<linearGradient gradientUnits="userSpaceOnUse" id="perfGradient" x1="236" x2="236" y1="1" y2="149">
+<stop stop-color="#4913ec" stop-opacity="0.2"></stop>
+<stop offset="1" stop-color="#4913ec" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+</svg>
+</div>
+<div class="flex justify-between mt-2 text-xs font-bold text-muted-light dark:text-muted-dark">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="text-center mt-12">
+<button class="relative group inline-flex items-center justify-center overflow-hidden rounded-lg bg-primary px-8 py-3 text-base font-bold text-white shadow-lg shadow-primary/30 transition-all duration-300 ease-in-out hover:scale-105">
+<span class="z-10">Take New Interview</span>
+<span class="absolute inset-0 z-0 h-full w-full bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-20 group-hover-ripple:after:absolute group-hover-ripple:after:inset-0 group-hover-ripple:after:z-20 group-hover-ripple:after:h-full group-hover-ripple:after:w-full group-hover-ripple:after:rounded-lg group-hover-ripple:after:bg-white"></span>
+</button>
+</div>
+</main>
+</div>
+
+</body></html>
+

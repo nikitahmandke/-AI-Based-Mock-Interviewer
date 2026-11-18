@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Mock Interviewer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#4913ec",
+                "background-light": "#f6f6f8",
+                "background-dark": "#151022",
+            },
+            fontFamily: {
+                "display": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+        },
+    },
+}
+</script>
+<style>
+.gradient-border {
+    position: relative;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, white, #a7f3d0);
+}
+.dark .gradient-border::before {
+     background: linear-gradient(to bottom, #1e293b, #4913ec);
+}
+</style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark antialiased">
+<div class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-background-light to-teal-100 dark:from-background-dark dark:via-background-dark dark:to-indigo-900/30 overflow-hidden">
+<div class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl opacity-50"></div>
+<div class="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-96 h-96 bg-teal-200/30 dark:bg-teal-500/20 rounded-full blur-3xl opacity-50"></div>
+<div class="relative w-full max-w-md p-8 m-4 bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-xl gradient-border">
+<div class="text-center">
+<h1 class="text-3xl font-bold text-slate-800 dark:text-white">Welcome Back</h1>
+<p class="mt-2 text-slate-600 dark:text-slate-400">Practice with our AI-powered mock interviewer.</p>
+</div>
+
+<!-- Updated form without flash messages -->
+<form class="mt-8 space-y-6" action="{{ url_for('login') }}" method="post">
+<div class="space-y-4">
+<div>
+<label class="sr-only" for="email">Email address</label>
+<input autocomplete="email" class="w-full px-4 py-3 text-slate-900 dark:text-white bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 rounded-lg placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50" id="email" name="email" placeholder="Email address" required="" type="email"/>
+</div>
+<div>
+<label class="sr-only" for="password">Password</label>
+<input autocomplete="current-password" class="w-full px-4 py-3 text-slate-900 dark:text-white bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 rounded-lg placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50" id="password" name="password" placeholder="Password" required="" type="password"/>
+</div>
+</div>
+<div>
+<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-300 ease-in-out hover:shadow-primary/40 hover:shadow-lg" type="submit">
+    Login
+</button>
+</div>
+<div class="mt-4 text-center space-y-2">
+  <a href="{{ url_for('forgot') }}" class="block text-sm font-medium text-primary hover:underline">Forgot Password?</a>
+  <a href="{{ url_for('signup') }}" class="block text-sm font-medium text-primary hover:underline">Don’t have an account? Sign up</a>
+</div>
+</form>
+
+<p class="mt-6 text-xs text-center text-slate-500 dark:text-slate-400">
+    By continuing, you agree to our <a class="font-medium text-primary hover:underline" href="#">Terms of Service</a> and <a class="font-medium text-primary hover:underline" href="#">Privacy Policy</a>.
+</p>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+

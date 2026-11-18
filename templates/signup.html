@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Mock Interviewer - Sign Up</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec13b6",
+                        "background-light": "#f8f6f8",
+                        "background-dark": "#22101d",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+</script>
+<style>
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 1.5rem;
+            border: 2px solid transparent;
+            background: linear-gradient(to bottom right, white, #a0e9ff) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+        }
+</style>
+</head>
+<body class="font-display bg-gradient-to-br from-white to-[#e0f7fa] dark:from-background-dark dark:to-[#1a2c32]">
+<div class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-50"></div>
+<div class="absolute -bottom-40 -right-40 w-96 h-96 bg-[#89f7fe]/20 rounded-full filter blur-3xl opacity-50"></div>
+<div class="relative w-full max-w-md p-8">
+<div class="absolute inset-0 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-xl gradient-border"></div>
+<div class="relative z-10 flex flex-col items-center">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Create Your Account</h2>
+<p class="text-gray-600 dark:text-gray-400 mb-8">Start your interview prep journey</p>
+
+<!-- Updated form without flash messages -->
+<form class="w-full space-y-4" action="{{ url_for('signup') }}" method="post">
+<div>
+<label class="sr-only" for="email">Email</label>
+<input class="w-full h-12 px-4 rounded-lg bg-background-light/70 dark:bg-background-dark/70 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 border-none focus:ring-2 focus:ring-primary/50" id="email" name="email" placeholder="Email" required type="email"/>
+</div>
+<div>
+<label class="sr-only" for="password">Password</label>
+<input class="w-full h-12 px-4 rounded-lg bg-background-light/70 dark:bg-background-dark/70 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 border-none focus:ring-2 focus:ring-primary/50" id="password" name="password" placeholder="Password" required type="password"/>
+</div>
+<div>
+<label class="sr-only" for="confirm-password">Confirm Password</label>
+<input class="w-full h-12 px-4 rounded-lg bg-background-light/70 dark:bg-background-dark/70 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 border-none focus:ring-2 focus:ring-primary/50" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required type="password"/>
+</div>
+<button class="w-full h-12 px-5 rounded-lg bg-gradient-to-r from-primary to-[#9f33ff] text-white font-bold text-base tracking-wide uppercase transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary" type="submit">
+    Sign Up
+</button>
+</form>
+
+<p class="mt-8 text-sm text-gray-600 dark:text-gray-400">
+    Already have an account? 
+    <a class="font-medium text-primary hover:underline" href="{{ url_for('login') }}">Login</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+

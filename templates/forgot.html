@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reset Password</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#ec13a4",
+                    "background-light": "#f8f6f7",
+                    "background-dark": "#22101c",
+                },
+                fontFamily: {
+                    "display": ["Manrope", "sans-serif"]
+                },
+            },
+        },
+    }
+</script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="flex min-h-screen items-center justify-center p-4">
+  <div class="w-full max-w-md rounded-xl bg-white/80 p-8 shadow-xl backdrop-blur-lg dark:bg-black/40">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Reset Password</h1>
+    </div>
+
+    <form action="{{ url_for('forgot') }}" method="post" class="space-y-4">
+      <div>
+        <label for="email" class="sr-only">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required
+          class="w-full rounded-lg border-gray-300 bg-gray-100 p-3 text-gray-900 placeholder-gray-500 focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"/>
+      </div>
+
+      <div>
+        <label for="new_password" class="sr-only">New Password</label>
+        <input type="password" id="new_password" name="new_password" placeholder="New Password" required
+          class="w-full rounded-lg border-gray-300 bg-gray-100 p-3 text-gray-900 placeholder-gray-500 focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"/>
+      </div>
+
+      <div>
+        <label for="confirm_password" class="sr-only">Confirm Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required
+          class="w-full rounded-lg border-gray-300 bg-gray-100 p-3 text-gray-900 placeholder-gray-500 focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"/>
+      </div>
+
+      <div>
+        <button type="submit"
+          class="w-full rounded-lg bg-primary p-3 font-semibold text-white hover:bg-pink-600 transition">
+          Reset Password
+        </button>
+      </div>
+    </form>
+
+    <div class="mt-6 text-center">
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Already have an account?
+        <a href="{{ url_for('login') }}" class="font-medium text-primary hover:underline">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

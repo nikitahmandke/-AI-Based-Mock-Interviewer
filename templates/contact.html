@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InterviewPrepAI - Contact Us</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          primary: "#4913ec",
+          background: {
+            light: "#ffffff",
+            dark: "#0f0a19"
+          },
+          foreground: {
+            light: "#111827",
+            dark: "#f9fafb"
+          },
+          muted: {
+            light: "#6b7280",
+            dark: "#9ca3af"
+          },
+          subtle: {
+            light: "#e5e7eb",
+            dark: "#374151"
+          }
+        },
+        fontFamily: {
+          display: ["Manrope"]
+        },
+        borderRadius: {
+          DEFAULT: "0.5rem",
+          lg: "1rem",
+          xl: "1.5rem",
+          full: "9999px"
+        }
+      }
+    }
+  }
+</script>
+<style>
+    .gradient-glow {
+      background-image: linear-gradient(to right, #4913ec, #8a2be2);
+      box-shadow: 0 0 20px 5px rgba(73, 19, 236, 0.4);
+    }
+    .gradient-glow:hover {
+      box-shadow: 0 0 30px 10px rgba(73, 19, 236, 0.6);
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark">
+<div class="relative min-h-screen w-full">
+<div class="absolute inset-0 z-0 bg-gradient-to-br from-background-light to-[#f0e7f3] dark:from-background-dark dark:to-[#2a1a33]"></div>
+<div class="relative z-10 flex h-full min-h-screen flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-subtle-light dark:border-subtle-dark/50 px-6 md:px-10 py-4">
+<a class="flex items-center gap-3 text-foreground-light dark:text-foreground-dark" href="#">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold">InterviewPrepAI</h2>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="{{ url_for('dashboard') }}">Home</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('pyqs') }}">PYQs</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('history') }}">History</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('contact') }}">Contact</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('about') }}">About</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="md:hidden">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+<span>Get Started</span>
+</button>
+</div>
+</header>
+<main class="flex flex-1 items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="flex flex-col justify-center">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground-light dark:text-foreground-dark">Get in Touch</h1>
+<p class="mt-4 text-lg text-muted-light dark:text-muted-dark">
+              We'd love to hear from you! Whether you have a question, feedback, or just want to say hello, our team is ready to assist you.
+            </p>
+<div class="mt-8 space-y-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 dark:bg-primary/20 text-primary">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+</div>
+<div>
+<h3 class="font-semibold text-foreground-light dark:text-foreground-dark">Email Us</h3>
+<p class="text-muted-light dark:text-muted-dark">support@interviewprepai.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 dark:bg-primary/20 text-primary">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+</div>
+<div>
+<h3 class="font-semibold text-foreground-light dark:text-foreground-dark">Call Us</h3>
+<p class="text-muted-light dark:text-muted-dark">(555) 123-4567</p>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-subtle-light dark:border-subtle-dark/50">
+<h3 class="font-semibold text-foreground-light dark:text-foreground-dark">Follow Us</h3>
+<div class="flex items-center gap-4 mt-4">
+<a class="text-muted-light dark:text-muted-dark hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.286 2.633 7.936 6.305 9.301.46.084.629-.199.629-.442 0-.217-.008-.79-.012-1.551-2.556.554-3.095-1.234-3.095-1.234-.418-1.062-1.02-1.344-1.02-1.344-.834-.57.063-.559.063-.559.922.065 1.407.946 1.407.946.819 1.406 2.149.999 2.673.764.084-.593.32-1 .584-1.23-2.038-.23-4.183-1.018-4.183-4.532 0-.999.358-1.815.941-2.454-.094-.23-.408-1.16.09-2.42 0 0 .77-.247 2.52.94.732-.204 1.518-.306 2.304-.31.786.004 1.572.106 2.304.31 1.75-1.187 2.518-.94 2.518-.94.5 1.26.185 2.19.091 2.42.584.64.94 1.455.94 2.454 0 3.523-2.147 4.299-4.192 4.526.328.282.62.838.62 1.69 0 1.22-.011 2.202-.011 2.5 0 .245.167.53.635.44A10.005 10.005 0 0022 12c0-5.523-4.477-10-10-10z" fill-rule="evenodd"></path></svg>
+</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16.325 4.001c-1.958 0-3.535 1.577-3.535 3.535s1.577 3.535 3.535 3.535 3.535-1.577 3.535-3.535-1.577-3.535-3.535-3.535zM21 4h-2.527c-.295-1.121-1.353-2-2.613-2s-2.318.879-2.613 2H10.5c-1.48 0-2.682 1.202-2.682 2.682v2.852c-1.121.295-2 1.353-2 2.613s.879 2.318 2 2.613v2.527c0 1.48 1.202 2.682 2.682 2.682h2.852c.295 1.121 1.353 2 2.613 2s2.318-.879 2.613-2H21c1.48 0 2.682-1.202 2.682-2.682v-2.852c1.121-.295 2-1.353 2-2.613s-.879-2.318-2-2.613V6.682C23.682 5.202 22.48 4 21 4zm-4.675 6.682c-1.48 0-2.682-1.202-2.682-2.682s1.202-2.682 2.682-2.682 2.682 1.202 2.682 2.682-1.202 2.682-2.682 2.682z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</main>
+<footer class="text-center py-8 px-6 text-muted-light dark:text-muted-dark">
+<div class="border-t border-subtle-light dark:border-subtle-dark/50 max-w-4xl mx-auto pt-8">
+<div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-4">
+<a class="text-sm hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<p class="text-sm">© 2024 InterviewPrepAI. All rights reserved.</p>
+</div></footer>
+</div></div>
+</body></html>

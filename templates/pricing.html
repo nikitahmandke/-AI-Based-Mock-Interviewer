@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Mock Interviewer - Pricing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#4913ec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#151022",
+          },
+          fontFamily: {
+            "display": ["Manrope"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .gradient-glow {
+      background-image: linear-gradient(to right, #4913ec, #8a2be2);
+      box-shadow: 0 0 20px 5px rgba(73, 19, 236, 0.4);
+    }
+    .gradient-glow:hover {
+      box-shadow: 0 0 30px 10px rgba(73, 19, 236, 0.6);
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative min-h-screen w-full overflow-x-hidden bg-gradient-to-b from-white to-background-light dark:from-background-dark dark:to-[#110e1b]">
+<div class="absolute inset-0 z-0">
+<div class="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(73,19,236,0.15),rgba(255,255,255,0))]"></div>
+<div class="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(138,43,226,0.1),rgba(255,255,255,0))]"></div>
+</div>
+<div class="relative z-10 flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap px-10 py-4">
+<div class="flex items-center gap-3 text-slate-800 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path></svg>
+</div>
+<h2 class="text-lg font-bold">InterviewPrepAI</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="{{ url_for('dashboard') }}">Home</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('pyqs') }}">PYQs</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('history') }}">History</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('pricing') }}">Pricing</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('contact') }}">Contact</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('about') }}">About</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('profile') }}">Profile</a>
+</nav>
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary text-white text-sm font-bold shadow-[0_5px_15px_rgba(73,19,236,0.4)] transition-all hover:shadow-[0_8px_25px_rgba(73,19,236,0.5)]">
+                    Get started
+                </button>
+</header>
+<main class="flex-1 px-4 py-16 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-5xl text-center">
+<h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+                        Choose the plan that's right for you
+                    </h1>
+<p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+                        Join millions of users preparing for their dream jobs.
+                    </p>
+</div>
+<div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+<div class="glassmorphism-card rounded-xl p-8 flex flex-col">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white">Basic</h3>
+<p class="mt-2 flex items-baseline text-slate-900 dark:text-white">
+<span class="text-4xl font-extrabold tracking-tight">Free</span>
+<span class="ml-1 text-xl font-semibold">/month</span>
+</p>
+<p class="mt-4 text-sm text-slate-500 dark:text-slate-400">For casual users getting started with interview prep.</p>
+<button class="mt-6 w-full rounded-lg bg-primary/10 dark:bg-primary/20 text-primary py-3 text-sm font-semibold transition-colors hover:bg-primary/20 dark:hover:bg-primary/30">Get started</button>
+<ul class="mt-8 space-y-4 text-sm text-slate-700 dark:text-slate-300">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Unlimited practice interviews
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                AI-powered feedback
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Personalized interview questions
+                            </li>
+</ul>
+</div>
+<div class="relative glassmorphism-card rounded-xl p-8 flex flex-col ring-2 ring-primary">
+<div class="absolute top-0 right-8 -translate-y-1/2 transform">
+<span class="rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">Most Popular</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white">Pro</h3>
+<p class="mt-2 flex items-baseline text-slate-900 dark:text-white">
+<span class="text-4xl font-extrabold tracking-tight">$19</span>
+<span class="ml-1 text-xl font-semibold">/month</span>
+</p>
+<p class="mt-4 text-sm text-slate-500 dark:text-slate-400">For serious applicants looking for an edge.</p>
+<button class="gradient-button mt-6 w-full rounded-lg text-white py-3 text-sm font-semibold shadow-[0_5px_15px_rgba(73,19,236,0.4)] transition-all hover:shadow-[0_8px_25px_rgba(138,43,226,0.5)] hover:scale-105">Get started</button>
+<ul class="mt-8 space-y-4 text-sm text-slate-700 dark:text-slate-300">
+<li class="flex items-center gap-3 font-semibold">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Everything in Basic, plus:
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Advanced analytics
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Priority support
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Resume review
+                            </li>
+</ul>
+</div>
+<div class="glassmorphism-card rounded-xl p-8 flex flex-col">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-white">Premium</h3>
+<p class="mt-2 flex items-baseline text-slate-900 dark:text-white">
+<span class="text-4xl font-extrabold tracking-tight">$49</span>
+<span class="ml-1 text-xl font-semibold">/month</span>
+</p>
+<p class="mt-4 text-sm text-slate-500 dark:text-slate-400">For professionals who need the absolute best.</p>
+<button class="mt-6 w-full rounded-lg bg-primary/10 dark:bg-primary/20 text-primary py-3 text-sm font-semibold transition-colors hover:bg-primary/20 dark:hover:bg-primary/30">Get started</button>
+<ul class="mt-8 space-y-4 text-sm text-slate-700 dark:text-slate-300">
+<li class="flex items-center gap-3 font-semibold">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Everything in Pro, plus:
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Dedicated account manager
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Customized interview scenarios
+                            </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                                Exclusive content
+                            </li>
+</ul>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

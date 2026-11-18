@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>InterviewPrepAI - Previous Year Questions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4913ec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#151022",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "1rem",
+              xl: "1.5rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .glassmorphism-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .dark .glassmorphism-card {
+        background: rgba(30, 30, 40, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .gradient-glow {
+        background-image: linear-gradient(to right, #4913ec, #8a2be2);
+        box-shadow: 0 0 20px 5px rgba(73, 19, 236, 0.4);
+      }
+      .gradient-glow:hover {
+        box-shadow: 0 0 30px 10px rgba(73, 19, 236, 0.6);
+      }
+      .loading-spinner {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #4913ec;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="font-display bg-background-light dark:bg-background-dark">
+    <div
+      class="relative min-h-screen w-full overflow-x-hidden bg-gradient-to-b from-white to-background-light dark:from-background-dark dark:to-[#110e1b]"
+    >
+      <div class="absolute inset-0 z-0">
+        <div
+          class="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(73,19,236,0.15),rgba(255,255,255,0))]"
+        ></div>
+        <div
+          class="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(138,43,226,0.1),rgba(255,255,255,0))]"
+        ></div>
+      </div>
+      <div class="relative z-10 flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap px-10 py-4"
+        >
+          <div class="flex items-center gap-3 text-slate-800 dark:text-white">
+            <div class="size-6 text-primary">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-lg font-bold">InterviewPrepAI</h2>
+          </div>
+          <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="{{ url_for('dashboard') }}">Home</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('pyqs') }}">PYQs</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('history') }}">History</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('contact') }}">Contact</a>
+<a class="hover:text-primary transition-colors" href="{{ url_for('about') }}">About</a>
+</nav>
+          <button
+            class="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary text-white text-sm font-bold shadow-[0_5px_15px_rgba(73,19,236,0.4)] transition-all hover:shadow-[0_8px_25px_rgba(73,19,236,0.5)]"
+          >
+            Get started
+          </button>
+        </header>
+
+        <main class="flex-1 px-4 py-12 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-7xl">
+            <div class="text-center">
+              <h1
+                class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl"
+              >
+                Previous Year Questions (PYQ)
+              </h1>
+              <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+                Ace your interviews with our curated collection of questions
+                from top companies.
+              </p>
+            </div>
+
+            <div class="mt-10 flex flex-col gap-8 lg:flex-row">
+              <aside class="lg:w-1/4">
+                <div class="sticky top-20">
+                  <div class="space-y-6">
+                    <div>
+                      <h3
+                        class="text-lg font-semibold text-slate-900 dark:text-white"
+                      >
+                        Filters
+                      </h3>
+                      <div class="mt-4 space-y-4">
+                        <div>
+                          <label class="sr-only" for="search">Search</label>
+                          <div class="relative">
+                            <div
+                              class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+                            >
+                              <span
+                                class="material-symbols-outlined text-slate-400"
+                                >search</span
+                              >
+                            </div>
+                            <input
+                              class="block w-full rounded-md border-slate-300 bg-white dark:bg-slate-800 dark:border-slate-700 py-2 pl-10 pr-3 text-sm placeholder:text-slate-400 focus:border-primary focus:ring-primary dark:text-white"
+                              id="search"
+                              placeholder="Search by company or topic"
+                              type="search"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300"
+                            for="company-filter"
+                            >Company</label
+                          >
+                          <select
+                            class="mt-1 block w-full rounded-md border-slate-300 bg-white dark:bg-slate-800 dark:border-slate-700 py-2 pl-3 pr-10 text-base focus:border-primary focus:outline-none focus:ring-primary sm:text-sm dark:text-white"
+                            id="company-filter"
+                          >
+                            <option value="all">All Companies</option>
+                            <!-- Companies will be populated dynamically -->
+                          </select>
+                        </div>
+                        <div>
+                          <label
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300"
+                            for="topic-filter"
+                            >Topic</label
+                          >
+                          <select
+                            class="mt-1 block w-full rounded-md border-slate-300 bg-white dark:bg-slate-800 dark:border-slate-700 py-2 pl-3 pr-10 text-base focus:border-primary focus:outline-none focus:ring-primary sm:text-sm dark:text-white"
+                            id="topic-filter"
+                          >
+                            <option value="all">All Topics</option>
+                            <!-- Topics will be populated dynamically -->
+                          </select>
+                        </div>
+                        <div>
+                          <label
+                            class="block text-sm font-medium text-slate-700 dark:text-slate-300"
+                            for="type-filter"
+                            >Question Type</label
+                          >
+                          <select
+                            class="mt-1 block w-full rounded-md border-slate-300 bg-white dark:bg-slate-800 dark:border-slate-700 py-2 pl-3 pr-10 text-base focus:border-primary focus:outline-none focus:ring-primary sm:text-sm dark:text-white"
+                            id="type-filter"
+                          >
+                            <option value="all">All Types</option>
+                            <!-- Question types will be populated dynamically -->
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="company-requirements-section">
+                      <h3
+                        class="text-lg font-semibold text-slate-900 dark:text-white"
+                      >
+                        Company Requirements
+                      </h3>
+                      <div class="mt-4 space-y-3" id="company-requirements">
+                        <!-- Company requirements will be populated dynamically -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+
+              <div class="lg:w-3/4">
+                <div id="loading-spinner" class="loading-spinner hidden"></div>
+                <div id="questions-container" class="space-y-6">
+                  <!-- Questions will be populated dynamically -->
+                </div>
+                <div id="pagination" class="flex justify-center pt-6 hidden">
+                  <!-- Pagination will be populated dynamically -->
+                </div>
+                <div id="no-results" class="text-center py-10 hidden">
+                  <p class="text-slate-600 dark:text-slate-400">
+                    No questions found matching your filters.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      // API Configuration
+      const API_BASE_URL = "http://127.0.0.1:5000/api";
+
+      // DOM Elements
+      const searchInput = document.getElementById("search");
+      const companyFilter = document.getElementById("company-filter");
+      const topicFilter = document.getElementById("topic-filter");
+      const typeFilter = document.getElementById("type-filter");
+      const questionsContainer = document.getElementById("questions-container");
+      const paginationContainer = document.getElementById("pagination");
+      const loadingSpinner = document.getElementById("loading-spinner");
+      const noResults = document.getElementById("no-results");
+      const companyRequirements = document.getElementById(
+        "company-requirements"
+      );
+
+      // State
+      let currentPage = 1;
+      let totalPages = 1;
+      let allCompanies = [];
+      let allTopics = [];
+      let allTypes = [];
+
+      // Initialize the application
+      document.addEventListener("DOMContentLoaded", function () {
+        loadFilters();
+        loadQuestions();
+        setupEventListeners();
+      });
+
+      // Set up event listeners for filters
+      function setupEventListeners() {
+        searchInput.addEventListener("input", debounce(loadQuestions, 300));
+        companyFilter.addEventListener("change", loadQuestions);
+        topicFilter.addEventListener("change", loadQuestions);
+        typeFilter.addEventListener("change", loadQuestions);
+      }
+
+      // Debounce function to limit API calls
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Load filter options from API
+      async function loadFilters() {
+        try {
+          const [companiesResponse, topicsResponse, typesResponse] =
+            await Promise.all([
+              fetch(`${API_BASE_URL}/companies`),
+              fetch(`${API_BASE_URL}/topics`),
+              fetch(`${API_BASE_URL}/question-types`),
+            ]);
+
+          if (companiesResponse.ok) {
+            allCompanies = await companiesResponse.json();
+            populateCompanyFilter();
+            populateCompanyRequirements();
+          }
+
+          if (topicsResponse.ok) {
+            allTopics = await topicsResponse.json();
+            populateTopicFilter();
+          }
+
+          if (typesResponse.ok) {
+            allTypes = await typesResponse.json();
+            populateTypeFilter();
+          }
+        } catch (error) {
+          console.error("Error loading filters:", error);
+        }
+      }
+
+      // Populate company filter dropdown
+      function populateCompanyFilter() {
+        companyFilter.innerHTML = '<option value="all">All Companies</option>';
+        allCompanies.forEach((company) => {
+          const option = document.createElement("option");
+          option.value = company.name;
+          option.textContent = company.name;
+          companyFilter.appendChild(option);
+        });
+      }
+
+      // Populate topic filter dropdown
+      function populateTopicFilter() {
+        topicFilter.innerHTML = '<option value="all">All Topics</option>';
+        allTopics.forEach((topic) => {
+          const option = document.createElement("option");
+          option.value = topic.name;
+          option.textContent = topic.name;
+          topicFilter.appendChild(option);
+        });
+      }
+
+      // Populate type filter dropdown
+      function populateTypeFilter() {
+        typeFilter.innerHTML = '<option value="all">All Types</option>';
+        allTypes.forEach((type) => {
+          const option = document.createElement("option");
+          option.value = type;
+          option.textContent = type
+            .replace("_", " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase());
+          typeFilter.appendChild(option);
+        });
+      }
+
+      // Populate company requirements section
+      function populateCompanyRequirements() {
+        companyRequirements.innerHTML = "";
+        allCompanies.forEach((company) => {
+          const requirementDiv = document.createElement("div");
+          requirementDiv.className = "glassmorphism-card p-4 rounded-lg";
+          requirementDiv.innerHTML = `
+        <h4 class="font-semibold text-slate-800 dark:text-white">${
+          company.name
+        }</h4>
+        <div class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          ${
+            company.requirements
+              ? company.requirements
+                  .split(", ")
+                  .map((req) => `<div>• ${req}</div>`)
+                  .join("")
+              : "No specific requirements listed."
+          }
+        </div>
+      `;
+          companyRequirements.appendChild(requirementDiv);
+        });
+      }
+
+      // Load questions from API
+      async function loadQuestions() {
+        showLoading();
+
+        const search = searchInput.value.trim();
+        const company = companyFilter.value;
+        const topic = topicFilter.value;
+        const type = typeFilter.value;
+
+        // Build query parameters
+        const params = new URLSearchParams();
+        if (search) params.append("search", search);
+        if (company && company !== "all") params.append("company", company);
+        if (topic && topic !== "all") params.append("topic", topic);
+        if (type && type !== "all") params.append("type", type);
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/questions?${params}`);
+          if (response.ok) {
+            const questions = await response.json();
+            displayQuestions(questions);
+          } else {
+            throw new Error("Failed to fetch questions");
+          }
+        } catch (error) {
+          console.error("Error loading questions:", error);
+          questionsContainer.innerHTML =
+            '<p class="text-red-500 text-center">Error loading questions. Please try again.</p>';
+        } finally {
+          hideLoading();
+        }
+      }
+
+      // Display questions in the container
+      function displayQuestions(questions) {
+        if (questions.length === 0) {
+          questionsContainer.innerHTML = "";
+          noResults.classList.remove("hidden");
+          paginationContainer.classList.add("hidden");
+          return;
+        }
+
+        noResults.classList.add("hidden");
+        questionsContainer.innerHTML = questions
+          .map(
+            (question) => `
+          <div class="glassmorphism-card rounded-xl p-6">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-sm font-semibold text-primary">${
+                  question.company_name || "General"
+                } | ${formatQuestionType(question.type)}</p>
+                <h3 class="mt-1 text-lg font-bold text-slate-900 dark:text-white">${
+                  question.title
+                }</h3>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer">bookmark_add</span>
+            </div>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">${
+              question.description || "No description available."
+            }</p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">visibility</span> 
+                  ${question.views || 0} views
+                </span>
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">thumb_up</span> 
+                  ${question.likes || 0} likes
+                </span>
+              </div>
+              <a class="text-sm font-semibold text-primary hover:underline cursor-pointer" 
+                 onclick="viewQuestionDetails(${question.id})">
+                View details →
+              </a>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+
+        // Show pagination if needed (you can implement this later)
+        paginationContainer.classList.add("hidden");
+      }
+
+      // Format question type for display
+      function formatQuestionType(type) {
+        return type.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase());
+      }
+
+      // View question details
+      function viewQuestionDetails(questionId) {
+        // You can implement a modal or redirect to a details page
+        alert(`Viewing details for question ID: ${questionId}`);
+        // Example: window.location.href = `/question-details.html?id=${questionId}`;
+      }
+
+      // Show loading spinner
+      function showLoading() {
+        loadingSpinner.classList.remove("hidden");
+        questionsContainer.classList.add("hidden");
+      }
+
+      // Hide loading spinner
+      function hideLoading() {
+        loadingSpinner.classList.add("hidden");
+        questionsContainer.classList.remove("hidden");
+      }
+
+      // Initialize dark mode toggle (optional)
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark");
+        localStorage.setItem(
+          "darkMode",
+          document.documentElement.classList.contains("dark")
+        );
+      }
+
+      // Check for saved dark mode preference
+      if (localStorage.getItem("darkMode") === "true") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </body>
+</html>
+
